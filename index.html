@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minus Price</title>
-    <link rel="icon" href="https://i.ibb.co/W48rv8hd/icon.png" type="image/png">
+    <title>Minus Price Calculator</title>
+	<link rel="icon" href="https://i.ibb.co/W48rv8hd/icon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -59,7 +59,7 @@
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             border: 1px solid rgba(0,0,0,0.05);
         }
 
@@ -67,13 +67,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .input-box {
             position: relative;
-            width: 150px;
+            width: 180px; /* Increased width to fit 8 digits */
         }
 
         .input-box input {
@@ -84,7 +84,7 @@
             font-size: 1.2rem;
             text-align: center;
             font-weight: bold;
-            padding-right: 40px; /* Added padding to prevent text overlap with icon */
+            padding-right: 40px;
         }
 
         .input-box input:focus {
@@ -92,7 +92,7 @@
             border-color: var(--primary);
         }
 
-        /* Specific styling for Box B */
+        /* Orange theme for Box B */
         #valueB {
             border-color: var(--orange);
         }
@@ -108,16 +108,16 @@
             transform: translateY(-50%);
             background: var(--primary);
             color: white;
-            width: 45px;
-            height: 45px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.8rem;
-            pointer-events: auto; /* Ensure the icon is clickable */
-            z-index: 2; /* Ensure it's above the input */
+            pointer-events: auto;
+            z-index: 2;
         }
 
         /* Orange paste icon for Box B */
@@ -126,11 +126,11 @@
         }
 
         .paste-icon:hover {
-            background: var(--secondary);
+            opacity: 0.9;
         }
 
         .minus-text {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: var(--dark);
         }
@@ -147,16 +147,17 @@
         }
 
         .result-value {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: bold;
             color: var(--primary);
             padding: 1rem;
             background-color: #f9f9f9;
             border-radius: 8px;
-            min-height: 70px;
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
+            word-break: break-all;
         }
 
         .copy-btn {
@@ -206,6 +207,10 @@
             
             .minus-text {
                 margin: 0.5rem 0;
+            }
+            
+            .input-box {
+                width: 160px;
             }
         }
     </style>
@@ -274,8 +279,8 @@
             // Calculate result
             const result = valueA - valueB;
             
-            // Update result display
-            resultElement.textContent = formatNumber(result);
+            // Update result display without comma formatting
+            resultElement.textContent = result.toFixed(2);
         }
         
         // Sanitize input to only allow numbers and decimal point
@@ -290,14 +295,6 @@
             }
             
             return sanitized === '' ? 0 : parseFloat(sanitized);
-        }
-        
-        // Format number with commas for thousands
-        function formatNumber(num) {
-            return num.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
         }
         
         // Paste value from clipboard
